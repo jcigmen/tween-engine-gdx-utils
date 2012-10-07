@@ -1,5 +1,6 @@
 package com.noobs2d.tweenengine.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,7 +17,7 @@ public class DynamicText extends DynamicDisplay {
 	this.bitmapFont = new BitmapFont(bitmapFont.getData(), bitmapFont.getRegion(), false);
 	this.text = text;
 	alignment = HAlignment.CENTER;
-	wrapWidth = bitmapFont.getBounds(text).width;
+	wrapWidth = Gdx.graphics.getWidth();
 	setRegistration(registration);
     }
 
@@ -24,7 +25,7 @@ public class DynamicText extends DynamicDisplay {
 	this.bitmapFont = new BitmapFont(bitmapFont.getData(), bitmapFont.getRegion(), false);
 	this.text = text;
 	this.alignment = alignment;
-	wrapWidth = bitmapFont.getBounds(text).width;
+	wrapWidth = Gdx.graphics.getWidth();
 	setRegistration(registration);
     }
 
@@ -75,7 +76,7 @@ public class DynamicText extends DynamicDisplay {
 	if (visible) {
 	    spriteBatch.setColor(color);
 	    float x = position.x, y = position.y;
-	    float width = wrapWidth * scale.x, height = bitmapFont.getWrappedBounds(text, wrapWidth * scale.x).height;
+	    float width = bitmapFont.getBounds(text).width, height = bitmapFont.getWrappedBounds(text, wrapWidth * scale.x).height;
 	    switch (registration) {
 		case BOTTOM_CENTER:
 		    x -= width / 2;
@@ -89,11 +90,12 @@ public class DynamicText extends DynamicDisplay {
 		    y += height;
 		    break;
 		case CENTER_CENTER:
-		    x -= width / 2;
+		    //		    x += width / 2;
 		    y += height / 2;
 		    break;
 		case LEFT_CENTER:
 		    y += height / 2;
+		    break;
 		case TOP_CENTER:
 		    x -= width / 2;
 		    break;
@@ -105,7 +107,7 @@ public class DynamicText extends DynamicDisplay {
 		    y += height / 2;
 		    break;
 	    }
-	    bitmapFont.drawWrapped(spriteBatch, text, x, y, wrapWidth * scale.x, alignment);
+	    bitmapFont.drawWrapped(spriteBatch, text, x, y, width, alignment);
 	}
     }
 

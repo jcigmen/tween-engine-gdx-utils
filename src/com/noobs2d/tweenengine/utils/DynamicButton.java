@@ -10,7 +10,12 @@ public class DynamicButton extends DynamicDisplay {
 
     public interface DynamicButtonCallback {
 
-	public void onButtonClicked(DynamicButton button);
+	static final int UP = 0;
+	static final int DOWN = 1;
+	static final int HOVER = 2;
+	static final int DRAG = 5;
+
+	public void onButtonEvent(DynamicButton button, int eventType);
 
     }
 
@@ -91,7 +96,10 @@ public class DynamicButton extends DynamicDisplay {
      */
     public void inputDown(float x, float y) {
 	if (enabled && visible && getBounds().contains(x, y))
-	    state = DynamicButton.State.DOWN;
+	    if (callback != null)
+		callback.onButtonEvent(this, DynamicButtonCallback.DOWN);
+	    else
+		state = DynamicButton.State.DOWN;
     }
 
     /**
@@ -99,8 +107,13 @@ public class DynamicButton extends DynamicDisplay {
      * @param y Input Y translated whether due to reverse-y.
      */
     public void inputDrag(float x, float y) {
-	if (enabled && visible && getBounds().contains(x, y) && state == DynamicButton.State.UP)
-	    state = DynamicButton.State.HOVER;
+	if (enabled && visible && getBounds().contains(x, y) && state == DynamicButton.State.UP) {
+	    position.add(position.x - x, position.y - y);
+	    if (callback != null)
+		callback.onButtonEvent(this, DynamicButtonCallback.DRAG);
+	    else
+		state = DynamicButton.State.DOWN;
+	}
 	if (enabled && visible && !getBounds().contains(x, y) && state == DynamicButton.State.HOVER)
 	    state = DynamicButton.State.UP;
     }
@@ -111,8 +124,11 @@ public class DynamicButton extends DynamicDisplay {
      */
     public void inputMove(float x, float y) {
 	if (enabled && visible && getBounds().contains(x, y) && state == DynamicButton.State.UP)
-	    state = DynamicButton.State.HOVER;
-	if (enabled && visible && !getBounds().contains(x, y) && state == DynamicButton.State.HOVER)
+	    if (callback != null)
+		callback.onButtonEvent(this, DynamicButtonCallback.HOVER);
+	    else
+		state = DynamicButton.State.HOVER;
+	else if (enabled && visible && !getBounds().contains(x, y) && state == DynamicButton.State.HOVER)
 	    state = DynamicButton.State.UP;
     }
 
@@ -123,11 +139,11 @@ public class DynamicButton extends DynamicDisplay {
     public void inputUp(float x, float y) {
 	if (enabled && visible && !getBounds().contains(x, y) && state == DynamicButton.State.DOWN)
 	    state = DynamicButton.State.UP;
-	else if (enabled && visible && getBounds().contains(x, y)) {
-	    state = DynamicButton.State.HOVER;
-	    if (callback != null)
-		callback.onButtonClicked(this);
-	}
+	else if (enabled && visible && getBounds().contains(x, y))
+	    if (getBounds().contains(x, y) && callback != null)
+		callback.onButtonEvent(this, DynamicButtonCallback.UP);
+	    else
+		state = DynamicButton.State.HOVER;
     }
 
     @Override
