@@ -33,16 +33,14 @@ public class DynamicSprite extends DynamicDisplay {
     private float skewY4;
 
     public DynamicSprite(TextureRegion region, float x, float y) {
-	sprite = new Sprite(region);
-	position.set(x, y);
 	float width = 0;
 	float height = 0;
-	try {
+	if (region != null) {
+	    sprite = new Sprite(region);
 	    width = region.getRegionWidth();
 	    height = region.getRegionHeight();
-	} catch (NullPointerException e) {
-	    // Just in case someone uses new TextureRegion(). Whatever.
 	}
+	position.set(x, y);
 	setRegistration(registration);
 	bounds.set(x - width / 2, y - height / 2, width, height);
 	skewX1 = 0;
@@ -93,6 +91,7 @@ public class DynamicSprite extends DynamicDisplay {
 	return bounds;
     }
 
+    @Override
     public float getHeight() {
 	return sprite.getHeight();
     }
@@ -253,6 +252,7 @@ public class DynamicSprite extends DynamicDisplay {
 	}
     }
 
+    @Override
     public float getWidth() {
 	return sprite.getWidth();
     }

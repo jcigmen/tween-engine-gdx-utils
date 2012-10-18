@@ -108,6 +108,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 	return color;
     }
 
+    public float getHeight() {
+	return 0;
+    }
+
     public Vector2 getOrigin() {
 	return origin;
     }
@@ -189,6 +193,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 		assert false;
 		return -1;
 	}
+    }
+
+    public float getWidth() {
+	return 0;
     }
 
     public float getX() {
@@ -649,6 +657,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 	this.color = color;
     }
 
+    public void setHeight(float height) {
+
+    }
+
     public void setOrigin(float originX, float originY) {
 	origin.set(originX, originY);
     }
@@ -735,6 +747,18 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 		assert false;
 		break;
 	}
+    }
+
+    public void setWidth(float width) {
+
+    }
+
+    public void setX(float x) {
+	position.x = x;
+    }
+
+    public void setY(float y) {
+	position.y = y;
     }
 
     /** Basically should call updateBounds() and updateTween() */

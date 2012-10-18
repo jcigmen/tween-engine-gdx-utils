@@ -6,7 +6,6 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.TweenCallback;
 
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class DynamicCallback {
 
@@ -66,7 +65,7 @@ public class DynamicCallback {
 
 	public ReturnValues(DynamicDisplay source) {
 	    target = source;
-	    this.source = new DynamicSprite(new TextureRegion(), source.position.x, source.position.y);
+	    this.source = new DynamicSprite(null, source.position.x, source.position.y);
 	    this.source.scale.set(source.scale);
 	}
 
