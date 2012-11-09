@@ -14,7 +14,7 @@ public class DynamicText extends DynamicDisplay {
     public float wrapWidth;
 
     public DynamicText(BitmapFont bitmapFont, String text) {
-	this.bitmapFont = new BitmapFont(bitmapFont.getData(), bitmapFont.getRegion(), false);
+	this.bitmapFont = new BitmapFont(bitmapFont.getData().getFontFile(), bitmapFont.getRegion(), false);
 	this.text = text;
 	alignment = HAlignment.CENTER;
 	wrapWidth = Gdx.graphics.getWidth();
@@ -22,7 +22,7 @@ public class DynamicText extends DynamicDisplay {
     }
 
     public DynamicText(BitmapFont bitmapFont, String text, HAlignment alignment) {
-	this.bitmapFont = new BitmapFont(bitmapFont.getData(), bitmapFont.getRegion(), false);
+	this.bitmapFont = new BitmapFont(bitmapFont.getData().getFontFile(), bitmapFont.getRegion(), false);
 	this.text = text;
 	this.alignment = alignment;
 	wrapWidth = Gdx.graphics.getWidth();
@@ -90,7 +90,7 @@ public class DynamicText extends DynamicDisplay {
 		    y += height;
 		    break;
 		case CENTER_CENTER:
-		    //		    x += width / 2;
+		    x -= width / 2;
 		    y += height / 2;
 		    break;
 		case LEFT_CENTER:
@@ -147,6 +147,12 @@ public class DynamicText extends DynamicDisplay {
 		origin.set(x, y - height * scale.y);
 		break;
 	}
+    }
+
+    @Override
+    public void setScale(float scaleX, float scaleY) {
+	scale.set(scaleX, scaleY);
+	bitmapFont.setScale(scaleX, scaleY);
     }
 
     @Override

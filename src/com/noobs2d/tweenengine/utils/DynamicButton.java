@@ -42,11 +42,11 @@ public class DynamicButton extends DynamicDisplay {
     @Override
     public Rectangle getBounds() {
 	float x = position.x, y = position.y;
-	float width = getStateRegion().getRegionWidth(), height = getStateRegion().getRegionHeight();
+	float width = getStateRegion().getRegionWidth() * scale.x, height = getStateRegion().getRegionHeight() * scale.y;
 	bounds.x = x;
 	bounds.y = y;
-	bounds.width = width * scale.x;
-	bounds.height = height * scale.y;
+	bounds.width = width;
+	bounds.height = height;
 	switch (registration) {
 	    case BOTTOM_CENTER:
 		bounds.x = x - width / 2;
@@ -95,11 +95,11 @@ public class DynamicButton extends DynamicDisplay {
      * @param y Input Y translated whether due to reverse-y.
      */
     public void inputDown(float x, float y) {
-	if (enabled && visible && getBounds().contains(x, y))
+	if (enabled && visible && getBounds().contains(x, y)) {
 	    if (callback != null)
 		callback.onButtonEvent(this, DynamicButtonCallback.DOWN);
-	    else
-		state = DynamicButton.State.DOWN;
+	    state = DynamicButton.State.DOWN;
+	}
     }
 
     /**
@@ -139,11 +139,11 @@ public class DynamicButton extends DynamicDisplay {
     public void inputUp(float x, float y) {
 	if (enabled && visible && !getBounds().contains(x, y) && state == DynamicButton.State.DOWN)
 	    state = DynamicButton.State.UP;
-	else if (enabled && visible && getBounds().contains(x, y))
-	    if (getBounds().contains(x, y) && callback != null)
+	else if (enabled && visible && getBounds().contains(x, y)) {
+	    if (callback != null)
 		callback.onButtonEvent(this, DynamicButtonCallback.UP);
-	    else
-		state = DynamicButton.State.HOVER;
+	    state = DynamicButton.State.HOVER;
+	}
     }
 
     @Override
@@ -195,6 +195,10 @@ public class DynamicButton extends DynamicDisplay {
 	    }
 	    spriteBatch.draw(getStateRegion(), x, y, origin.x, origin.y, width, height, scale.x, scale.y, rotation);
 	}
+    }
+
+    public void setCallback(DynamicButtonCallback callback) {
+	this.callback = callback;
     }
 
     @Override

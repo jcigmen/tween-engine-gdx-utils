@@ -2,6 +2,7 @@ package com.noobs2d.tweenengine.utils;
 
 import aurelienribon.tweenengine.Tween;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -155,6 +156,10 @@ public class DynamicSprite extends DynamicDisplay {
      */
     public float getSkewY4() {
 	return skewY4;
+    }
+
+    public Texture getTexture() {
+	return sprite.getTexture();
     }
 
     @Override
@@ -405,6 +410,7 @@ public class DynamicSprite extends DynamicDisplay {
 	    sprite.setOrigin(origin.x, origin.y);
 	    sprite.setScale(scale.x, scale.y);
 	    sprite.setRotation(rotation);
+	    sprite.setColor(color);
 	    sprite.getVertices()[SpriteBatch.X1] += skewX1;
 	    sprite.getVertices()[SpriteBatch.Y1] += skewY1;
 	    sprite.getVertices()[SpriteBatch.X2] += skewX2;

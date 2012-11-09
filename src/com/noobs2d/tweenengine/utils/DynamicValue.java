@@ -44,6 +44,11 @@ public class DynamicValue implements TweenAccessor<DynamicValue> {
 	interpolate(targetValue, Linear.INOUT, duration, true).delay(delay);
     }
 
+    public DynamicValue(float value, float targetValue, int duration, int delay, boolean autostart) {
+	this.value = value;
+	interpolate(targetValue, Linear.INOUT, duration, autostart).delay(delay);
+    }
+
     @Override
     public int getValues(DynamicValue target, int tweenType, float[] returnValues) {
 	returnValues[0] = target.value;

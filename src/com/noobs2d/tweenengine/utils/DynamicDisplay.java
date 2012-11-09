@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 
     protected static final int POSITION_X = 0x01;
+
     protected static final int POSITION_Y = 0x02;
     protected static final int POSITION_XY = 0x03;
     protected static final int SCALE_X = 0x04;
@@ -40,12 +41,12 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
     protected Rectangle bounds = new Rectangle();
 
     public DynamicRegistration registration = DynamicRegistration.CENTER_CENTER;
+
     public Vector2 position = new Vector2(0, 0);
     public Vector2 scale = new Vector2(1, 1);
     public Vector2 origin = new Vector2(0, 0);
     public Color color = new Color(1f, 1f, 1f, 1f);
     public float rotation = 0f;
-
     /**
      * Whether this cannot and will not invoke collision callbacks.
      */
@@ -57,11 +58,8 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
     public boolean visible = true;
 
     public Tween tween;
-
     public TweenCallback tweenCallback;
-
     public long tweenDeltaTime = System.currentTimeMillis();
-
     public TweenManager tweenManager = new TweenManager();
 
     public float tweenSpeed = 1f;
@@ -650,11 +648,27 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 	return tween;
     }
 
+    public boolean isVisible() {
+	return visible;
+    }
+
+    public void pause() {
+	tweenManager.pause();
+    }
+
     /** Draw this display. */
     public abstract void render(SpriteBatch spriteBatch);
 
+    public void resume() {
+	tweenManager.resume();
+    }
+
     public void setColor(Color color) {
 	this.color = color;
+    }
+
+    public void setColor(float r, float g, float b, float a) {
+	color.set(r, g, b, a);
     }
 
     public void setHeight(float height) {
@@ -747,6 +761,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 		assert false;
 		break;
 	}
+    }
+
+    public void setVisible(boolean visible) {
+	this.visible = visible;
     }
 
     public void setWidth(float width) {

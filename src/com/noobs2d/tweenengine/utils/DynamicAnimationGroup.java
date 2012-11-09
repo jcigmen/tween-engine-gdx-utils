@@ -81,6 +81,12 @@ public class DynamicAnimationGroup extends DynamicDisplay {
     }
 
     @Override
+    public void pause() {
+	for (int i = 0; i < displays.size(); i++)
+	    displays.get(i).pause();
+    }
+
+    @Override
     public void render(SpriteBatch spriteBatch) {
 	if (visible) {
 	    spriteBatch.setColor(color);
@@ -146,6 +152,12 @@ public class DynamicAnimationGroup extends DynamicDisplay {
 	    displays.get(i).enabled = true;
 	    displays.get(i).tweenManager.update(1000);
 	}
+    }
+
+    @Override
+    public void resume() {
+	for (int i = 0; i < displays.size(); i++)
+	    displays.get(i).resume();
     }
 
     @Override

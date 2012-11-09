@@ -12,14 +12,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 
 public class DynamicScreen implements InputProcessor, Screen {
 
-    public static class DynamicCamera extends Camera implements TweenAccessor<DynamicCamera> {
+    public static class DynamicCamera extends OrthographicCamera implements TweenAccessor<DynamicCamera> {
 
 	protected static final int TWEEN_XY = 1;
 	protected static final int TWEEN_ZOOM = 2;
@@ -260,8 +260,8 @@ public class DynamicScreen implements InputProcessor, Screen {
 
     @Override
     public void resize(int viewportWidth, int viewportHeight) {
-	camera.viewportWidth = viewportWidth;
-	camera.viewportHeight = viewportHeight;
+	//	camera.viewportWidth = viewportWidth;
+	//	camera.viewportHeight = viewportHeight;
     }
 
     @Override
