@@ -44,6 +44,7 @@ public class Test extends Game {
 	//	sprite.interpolateSkewX3(10f, 2000, false).delay(2000).repeat(Tween.INFINITY, 4000).start(sprite.tweenManager);
 
 	sprite.setRegistration(DynamicRegistration.BOTTOM_CENTER);
+	sprite.setColor(1f, 1f, 1f, 0.2f);
 	sprite.interpolateScaleX(1.25f, 2000, false).repeatYoyo(Tween.INFINITY, 0).start(sprite.tweenManager);
 	sprite.interpolateScaleY(1.15f, 1200, false).repeatYoyo(Tween.INFINITY, 0).start(sprite.tweenManager);
 

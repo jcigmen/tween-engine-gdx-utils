@@ -663,6 +663,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 	tweenManager.resume();
     }
 
+    public void setAlpha(float alpha) {
+	color.a = alpha;
+    }
+
     public void setColor(Color color) {
 	this.color = color;
     }

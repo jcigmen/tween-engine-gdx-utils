@@ -28,4 +28,11 @@ public class DynamicToggleButton extends DynamicButton {
 		callback.onButtonEvent(this, DynamicButtonCallback.UP);
     }
 
+    public void toggle() {
+	if (state == State.DOWN)
+	    state = State.UP;
+	else if (state == State.UP)
+	    state = State.DOWN;
+    }
+
 }

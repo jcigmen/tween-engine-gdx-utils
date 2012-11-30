@@ -595,7 +595,7 @@ public class DynamicSprite extends DynamicDisplay {
     }
 
     @Override
-    public void update(float deltaTime) {
+    public void update(float delta) {
 	if (enabled)
 	    updateTween();
     }
