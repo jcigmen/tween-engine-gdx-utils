@@ -30,6 +30,23 @@ public class DynamicButton extends DynamicDisplay {
     public TextureRegion hoverstate;
     public TextureRegion downstate;
 
+    public DynamicButton(TextureRegion upstate, TextureRegion hoverstate, TextureRegion downstate) {
+	this.upstate = upstate;
+	this.hoverstate = hoverstate;
+	this.downstate = downstate;
+	state = State.UP;
+	setRegistration(registration);
+    }
+
+    public DynamicButton(TextureRegion upstate, TextureRegion hoverstate, TextureRegion downstate, float x, float y) {
+	this.upstate = upstate;
+	this.hoverstate = hoverstate;
+	this.downstate = downstate;
+	state = State.UP;
+	position.set(x, y);
+	setRegistration(registration);
+    }
+
     public DynamicButton(TextureRegion upstate, TextureRegion hoverstate, TextureRegion downstate, Vector2 position) {
 	this.upstate = upstate;
 	this.hoverstate = hoverstate;
@@ -58,7 +75,7 @@ public class DynamicButton extends DynamicDisplay {
 		bounds.x = x - width / 2;
 		bounds.y = y - height / 2;
 		break;
-	    case LEFT_CENTER:
+	    case CENTER_LEFT:
 		bounds.x = x - width;
 		bounds.y = y - height / 2;
 		break;
@@ -136,14 +153,16 @@ public class DynamicButton extends DynamicDisplay {
      * @param x Input X.
      * @param y Input Y translated whether due to reverse-y.
      */
-    public void inputUp(float x, float y) {
+    public boolean inputUp(float x, float y) {
 	if (enabled && visible && !getBounds().contains(x, y) && state == DynamicButton.State.DOWN)
 	    state = DynamicButton.State.UP;
 	else if (enabled && visible && getBounds().contains(x, y)) {
 	    if (callback != null)
 		callback.onButtonEvent(this, DynamicButtonCallback.UP);
 	    state = DynamicButton.State.HOVER;
+	    return true;
 	}
+	return false;
     }
 
     @Override
@@ -169,12 +188,12 @@ public class DynamicButton extends DynamicDisplay {
 		    x = position.x - width / 2;
 		    y = position.y - height / 2;
 		    break;
-		case RIGHT_CENTER:
+		case CENTER_RIGHT:
 		    origin.set(width, height / 2);
 		    x = position.x - width;
 		    y = position.y - height / 2;
 		    break;
-		case LEFT_CENTER:
+		case CENTER_LEFT:
 		    origin.set(0, height / 2);
 		    y = position.y - height / 2;
 		    break;

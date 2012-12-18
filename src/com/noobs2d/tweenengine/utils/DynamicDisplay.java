@@ -35,7 +35,7 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
     protected static final int COLOR_RGBA = 0xD;
 
     public enum DynamicRegistration {
-	TOP_LEFT, TOP_CENTER, TOP_RIGHT, LEFT_CENTER, CENTER_CENTER, RIGHT_CENTER, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT;
+	TOP_LEFT, TOP_CENTER, TOP_RIGHT, CENTER_LEFT, CENTER_CENTER, CENTER_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT;
     }
 
     protected Rectangle bounds = new Rectangle();
@@ -46,7 +46,9 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
     public Vector2 scale = new Vector2(1, 1);
     public Vector2 origin = new Vector2(0, 0);
     public Color color = new Color(1f, 1f, 1f, 1f);
+    private String name = "";
     public float rotation = 0f;
+
     /**
      * Whether this cannot and will not invoke collision callbacks.
      */
@@ -58,8 +60,11 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
     public boolean visible = true;
 
     public Tween tween;
+
     public TweenCallback tweenCallback;
+
     public long tweenDeltaTime = System.currentTimeMillis();
+
     public TweenManager tweenManager = new TweenManager();
 
     public float tweenSpeed = 1f;
@@ -108,6 +113,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 
     public float getHeight() {
 	return 0;
+    }
+
+    public String getName() {
+	return name;
     }
 
     public Vector2 getOrigin() {
@@ -648,6 +657,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 	return tween;
     }
 
+    public boolean isEnabled(boolean enabled) {
+	return enabled;
+    }
+
     public boolean isVisible() {
 	return visible;
     }
@@ -675,8 +688,16 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 	color.set(r, g, b, a);
     }
 
+    public void setEnabled(boolean enabled) {
+	this.enabled = enabled;
+    }
+
     public void setHeight(float height) {
 
+    }
+
+    public void setName(String name) {
+	this.name = name;
     }
 
     public void setOrigin(float originX, float originY) {
@@ -700,6 +721,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 
     public void setRotation(float rotation) {
 	this.rotation = rotation;
+    }
+
+    public void setScale(float scale) {
+	this.scale.set(scale, scale);
     }
 
     public void setScale(float scaleX, float scaleY) {

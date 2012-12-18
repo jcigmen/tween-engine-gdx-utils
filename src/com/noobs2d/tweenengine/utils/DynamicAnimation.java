@@ -84,7 +84,7 @@ public class DynamicAnimation extends DynamicDisplay {
 		bounds.x = x - width / 2;
 		bounds.y = y - height / 2;
 		break;
-	    case LEFT_CENTER:
+	    case CENTER_LEFT:
 		bounds.x = x - width;
 		bounds.y = y - height / 2;
 		break;
@@ -103,8 +103,18 @@ public class DynamicAnimation extends DynamicDisplay {
 	return bounds;
     }
 
+    @Override
+    public float getHeight() {
+	return getKeyFrame().getRegionWidth();
+    }
+
     public TextureRegion getKeyFrame() {
 	return keyFrames[frameIndex];
+    }
+
+    @Override
+    public float getWidth() {
+	return getKeyFrame().getRegionHeight();
     }
 
     @Override
@@ -130,12 +140,12 @@ public class DynamicAnimation extends DynamicDisplay {
 		    x = position.x - width / 2;
 		    y = position.y - height / 2;
 		    break;
-		case RIGHT_CENTER:
+		case CENTER_RIGHT:
 		    origin.set(width, height / 2);
 		    x = position.x - width;
 		    y = position.y - height / 2;
 		    break;
-		case LEFT_CENTER:
+		case CENTER_LEFT:
 		    origin.set(0, height / 2);
 		    y = position.y - height / 2;
 		    break;

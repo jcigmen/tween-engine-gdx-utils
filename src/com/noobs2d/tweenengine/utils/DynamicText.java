@@ -48,11 +48,11 @@ public class DynamicText extends DynamicDisplay {
 		bounds.x = x - width / 2;
 		bounds.y = y - height / 2;
 		break;
-	    case RIGHT_CENTER:
+	    case CENTER_RIGHT:
 		bounds.x = x - width;
 		bounds.y = y - height / 2;
 		break;
-	    case LEFT_CENTER:
+	    case CENTER_LEFT:
 		bounds.x = x - width / 2;
 		bounds.y = y - height / 2;
 		break;
@@ -93,7 +93,7 @@ public class DynamicText extends DynamicDisplay {
 		    x -= width / 2;
 		    y += height / 2;
 		    break;
-		case LEFT_CENTER:
+		case CENTER_LEFT:
 		    y += height / 2;
 		    break;
 		case TOP_CENTER:
@@ -102,7 +102,7 @@ public class DynamicText extends DynamicDisplay {
 		case TOP_RIGHT:
 		    x -= width;
 		    break;
-		case RIGHT_CENTER:
+		case CENTER_RIGHT:
 		    x -= width;
 		    y += height / 2;
 		    break;
@@ -131,10 +131,10 @@ public class DynamicText extends DynamicDisplay {
 	    case CENTER_CENTER:
 		origin.set(width / 2, height / 2);
 		break;
-	    case LEFT_CENTER:
+	    case CENTER_LEFT:
 		origin.set(x - width * scale.x, y - height * scale.y / 2);
 		break;
-	    case RIGHT_CENTER:
+	    case CENTER_RIGHT:
 		origin.set(x, y - height * scale.y / 2);
 		break;
 	    case TOP_CENTER:

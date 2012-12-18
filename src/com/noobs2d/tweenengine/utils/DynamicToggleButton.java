@@ -22,10 +22,13 @@ public class DynamicToggleButton extends DynamicButton {
     }
 
     @Override
-    public void inputUp(float x, float y) {
-	if (enabled && visible && getBounds().contains(x, y))
+    public boolean inputUp(float x, float y) {
+	if (enabled && visible && getBounds().contains(x, y)) {
 	    if (callback != null)
 		callback.onButtonEvent(this, DynamicButtonCallback.UP);
+	    return true;
+	}
+	return false;
     }
 
     public void toggle() {
