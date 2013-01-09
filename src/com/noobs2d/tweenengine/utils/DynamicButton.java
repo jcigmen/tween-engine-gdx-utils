@@ -24,7 +24,9 @@ public class DynamicButton extends DynamicDisplay {
     }
 
     public DynamicButtonCallback callback;
+
     public Sound tapSound;
+
     public State state;
     public TextureRegion upstate;
     public TextureRegion hoverstate;
@@ -76,6 +78,9 @@ public class DynamicButton extends DynamicDisplay {
 		bounds.y = y - height / 2;
 		break;
 	    case CENTER_LEFT:
+		bounds.y = y - height / 2;
+		break;
+	    case CENTER_RIGHT:
 		bounds.x = x - width;
 		bounds.y = y - height / 2;
 		break;
@@ -94,6 +99,11 @@ public class DynamicButton extends DynamicDisplay {
 	return bounds;
     }
 
+    @Override
+    public float getHeight() {
+	return getStateRegion().getRegionWidth() * scale.x;
+    }
+
     public TextureRegion getStateRegion() {
 	switch (state) {
 	    case DOWN:
@@ -107,16 +117,23 @@ public class DynamicButton extends DynamicDisplay {
 	}
     }
 
+    @Override
+    public float getWidth() {
+	return getStateRegion().getRegionHeight() * scale.y;
+    }
+
     /**
      * @param x Input X.
      * @param y Input Y translated whether due to reverse-y.
      */
-    public void inputDown(float x, float y) {
+    public boolean inputDown(float x, float y) {
 	if (enabled && visible && getBounds().contains(x, y)) {
 	    if (callback != null)
 		callback.onButtonEvent(this, DynamicButtonCallback.DOWN);
 	    state = DynamicButton.State.DOWN;
+	    return true;
 	}
+	return false;
     }
 
     /**
@@ -166,9 +183,9 @@ public class DynamicButton extends DynamicDisplay {
     }
 
     @Override
-    public void render(SpriteBatch spriteBatch) {
+    public void render(SpriteBatch batch) {
 	if (visible) {
-	    spriteBatch.setColor(color);
+	    batch.setColor(color);
 	    float x = position.x, y = position.y;
 	    float width = getStateRegion().getRegionWidth(), height = getStateRegion().getRegionHeight();
 	    switch (registration) {
@@ -212,7 +229,7 @@ public class DynamicButton extends DynamicDisplay {
 		    y = position.y - height;
 		    break;
 	    }
-	    spriteBatch.draw(getStateRegion(), x, y, origin.x, origin.y, width, height, scale.x, scale.y, rotation);
+	    batch.draw(getStateRegion(), x, y, origin.x, origin.y, width, height, scale.x, scale.y, rotation);
 	}
     }
 
@@ -226,7 +243,7 @@ public class DynamicButton extends DynamicDisplay {
     }
 
     @Override
-    public void update(float deltaTime) {
+    public void update(float delta) {
 	updateTween();
     }
 

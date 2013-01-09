@@ -130,7 +130,7 @@ public class DynamicDisplayGroup extends DynamicDisplay {
     }
 
     @Override
-    public void render(SpriteBatch spriteBatch) {
+    public void render(SpriteBatch batch) {
 	if (visible)
 	    for (int i = 0; i < displays.size(); i++) {
 		DynamicDisplay target = displays.get(i);
@@ -138,11 +138,11 @@ public class DynamicDisplayGroup extends DynamicDisplay {
 		float originY = target.getOriginY();
 		if (inheritParentColor) {
 		    target.setColor(color);
-		    spriteBatch.setColor(color);
+		    batch.setColor(color);
 		}
 		target.setPosition(target.getX() + position.x, target.getY() + position.y);
 		target.setOrigin(origin.x, origin.y);
-		target.render(spriteBatch);
+		target.render(batch);
 		target.setPosition(target.getX() - position.x, target.getY() - position.y);
 		target.setOrigin(originX, originY);
 	    }
@@ -175,6 +175,10 @@ public class DynamicDisplayGroup extends DynamicDisplay {
 	    this.registration = registration;
 	    displays.get(i).setRegistration(registration);
 	}
+    }
+
+    public int size() {
+	return displays.size();
     }
 
     @Override

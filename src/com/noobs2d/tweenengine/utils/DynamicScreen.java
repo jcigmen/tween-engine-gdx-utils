@@ -144,7 +144,7 @@ public class DynamicScreen implements InputProcessor, Screen {
 
     protected DynamicCamera camera;
 
-    protected SpriteBatch spriteBatch;
+    protected SpriteBatch batch;
 
     public DynamicScreen(Game game) {
 	super();
@@ -159,8 +159,8 @@ public class DynamicScreen implements InputProcessor, Screen {
 	Matrix4 projection = new Matrix4();
 	projection.setToOrtho2D(camera.position.x * camera.zoom, camera.position.y * camera.zoom, Gdx.graphics.getWidth() * camera.zoom, Gdx.graphics.getHeight() * camera.zoom, -1, 1);
 
-	spriteBatch = new SpriteBatch(100);
-	spriteBatch.setProjectionMatrix(projection);
+	batch = new SpriteBatch(100);
+	batch.setProjectionMatrix(projection);
     }
 
     public DynamicScreen(Game game, float viewportWidth, float viewportHeight) {
@@ -176,8 +176,8 @@ public class DynamicScreen implements InputProcessor, Screen {
 	Matrix4 projection = new Matrix4();
 	projection.setToOrtho2D(camera.position.x * camera.zoom, camera.position.y * camera.zoom, viewportWidth * camera.zoom, viewportHeight * camera.zoom, -1, 1);
 
-	spriteBatch = new SpriteBatch(100);
-	spriteBatch.setProjectionMatrix(projection);
+	batch = new SpriteBatch(100);
+	batch.setProjectionMatrix(projection);
 
     }
 

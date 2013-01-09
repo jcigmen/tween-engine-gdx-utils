@@ -10,7 +10,7 @@ public class DynamicToggleButton extends DynamicButton {
     }
 
     @Override
-    public void inputDown(float x, float y) {
+    public boolean inputDown(float x, float y) {
 	if (enabled && visible && getBounds().contains(x, y)) {
 	    if (callback != null)
 		callback.onButtonEvent(this, DynamicButtonCallback.DOWN);
@@ -18,7 +18,9 @@ public class DynamicToggleButton extends DynamicButton {
 		state = DynamicButton.State.UP;
 	    else if (state == State.UP)
 		state = DynamicButton.State.DOWN;
+	    return true;
 	}
+	return false;
     }
 
     @Override

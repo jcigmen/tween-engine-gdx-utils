@@ -9,8 +9,10 @@ import com.badlogic.gdx.math.Rectangle;
 public class DynamicText extends DynamicDisplay {
 
     public BitmapFont bitmapFont;
+
     public String text;
     public HAlignment alignment;
+
     public float wrapWidth;
 
     public DynamicText(BitmapFont bitmapFont, String text) {
@@ -27,6 +29,11 @@ public class DynamicText extends DynamicDisplay {
 	this.alignment = alignment;
 	wrapWidth = Gdx.graphics.getWidth();
 	setRegistration(registration);
+    }
+
+    @Override
+    public void dispose() {
+	bitmapFont.dispose();
     }
 
     @Override
@@ -71,10 +78,14 @@ public class DynamicText extends DynamicDisplay {
 	return bounds;
     }
 
+    public String getText() {
+	return text;
+    }
+
     @Override
-    public void render(SpriteBatch spriteBatch) {
+    public void render(SpriteBatch batch) {
 	if (visible) {
-	    spriteBatch.setColor(color);
+	    batch.setColor(color);
 	    float x = position.x, y = position.y;
 	    float width = bitmapFont.getBounds(text).width, height = bitmapFont.getWrappedBounds(text, wrapWidth * scale.x).height;
 	    switch (registration) {
@@ -107,7 +118,7 @@ public class DynamicText extends DynamicDisplay {
 		    y += height / 2;
 		    break;
 	    }
-	    bitmapFont.drawWrapped(spriteBatch, text, x, y, width, alignment);
+	    bitmapFont.drawWrapped(batch, text, x, y, width, alignment);
 	}
     }
 
@@ -150,13 +161,23 @@ public class DynamicText extends DynamicDisplay {
     }
 
     @Override
+    public void setScale(float scale) {
+	super.scale.set(scale, scale);
+	bitmapFont.setScale(scale, scale);
+    }
+
+    @Override
     public void setScale(float scaleX, float scaleY) {
 	scale.set(scaleX, scaleY);
 	bitmapFont.setScale(scaleX, scaleY);
     }
 
+    public void setText(String text) {
+	this.text = text;
+    }
+
     @Override
-    public void update(float deltaTime) {
+    public void update(float delta) {
 	if (enabled) {
 	    bitmapFont.setColor(color);
 	    bitmapFont.setScale(scale.x, scale.y);

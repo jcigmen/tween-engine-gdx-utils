@@ -26,7 +26,9 @@ public class DynamicSprite extends DynamicDisplay {
     private Sprite sprite;
     private float skewX1;
     private float skewY1;
+
     private float skewX2;
+
     private float skewY2;
     private float skewX3;
     private float skewY3;
@@ -55,6 +57,11 @@ public class DynamicSprite extends DynamicDisplay {
     }
 
     @Override
+    public void dispose() {
+	sprite.getTexture().dispose();
+    }
+
+    @Override
     public Rectangle getBounds() {
 	float x = position.x, y = position.y;
 	float width = sprite.getRegionWidth(), height = sprite.getRegionHeight();
@@ -74,6 +81,9 @@ public class DynamicSprite extends DynamicDisplay {
 		bounds.y = y - height / 2;
 		break;
 	    case CENTER_LEFT:
+		bounds.y = y - height / 2;
+		break;
+	    case CENTER_RIGHT:
 		bounds.x = x - width;
 		bounds.y = y - height / 2;
 		break;

@@ -22,6 +22,7 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
     protected static final int POSITION_X = 0x01;
 
     protected static final int POSITION_Y = 0x02;
+
     protected static final int POSITION_XY = 0x03;
     protected static final int SCALE_X = 0x04;
     protected static final int SCALE_Y = 0x05;
@@ -43,22 +44,22 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
     public DynamicRegistration registration = DynamicRegistration.CENTER_CENTER;
 
     public Vector2 position = new Vector2(0, 0);
+
     public Vector2 scale = new Vector2(1, 1);
+
     public Vector2 origin = new Vector2(0, 0);
+
     public Color color = new Color(1f, 1f, 1f, 1f);
     private String name = "";
     public float rotation = 0f;
-
     /**
      * Whether this cannot and will not invoke collision callbacks.
      */
     public boolean enabled = true;
-
     /**
      * Whether this will not be rendered.
      */
     public boolean visible = true;
-
     public Tween tween;
 
     public TweenCallback tweenCallback;
@@ -100,6 +101,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 	});
     }
 
+    public void dispose() {
+
+    }
+
     /**
      * Get the Rectangle bounds of this DynamicDisplay.
      * 
@@ -109,6 +114,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 
     public Color getColor() {
 	return color;
+    }
+
+    public Tween getCurrentTween() {
+	return tween;
     }
 
     public float getHeight() {
@@ -145,6 +154,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 
     public float getScaleY() {
 	return scale.y;
+    }
+
+    public TweenManager getTweenManager() {
+	return tweenManager;
     }
 
     @Override

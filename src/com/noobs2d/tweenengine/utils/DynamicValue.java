@@ -49,6 +49,26 @@ public class DynamicValue implements TweenAccessor<DynamicValue> {
 	interpolate(targetValue, Linear.INOUT, duration, autostart).delay(delay);
     }
 
+    public Tween getTween() {
+	return tween;
+    }
+
+    public TweenCallback getTweenCallback() {
+	return tweenCallback;
+    }
+
+    public long getTweenDeltaTime() {
+	return tweenDeltaTime;
+    }
+
+    public TweenManager getTweenManager() {
+	return tweenManager;
+    }
+
+    public float getTweenSpeed() {
+	return tweenSpeed;
+    }
+
     @Override
     public int getValues(DynamicValue target, int tweenType, float[] returnValues) {
 	returnValues[0] = target.value;
@@ -63,6 +83,26 @@ public class DynamicValue implements TweenAccessor<DynamicValue> {
 	if (autoStart)
 	    tween.start(tweenManager);
 	return tween;
+    }
+
+    public void setTween(Tween tween) {
+	this.tween = tween;
+    }
+
+    public void setTweenCallback(TweenCallback tweenCallback) {
+	this.tweenCallback = tweenCallback;
+    }
+
+    public void setTweenDeltaTime(long tweenDeltaTime) {
+	this.tweenDeltaTime = tweenDeltaTime;
+    }
+
+    public void setTweenManager(TweenManager tweenManager) {
+	this.tweenManager = tweenManager;
+    }
+
+    public void setTweenSpeed(float tweenSpeed) {
+	this.tweenSpeed = tweenSpeed;
     }
 
     @Override
