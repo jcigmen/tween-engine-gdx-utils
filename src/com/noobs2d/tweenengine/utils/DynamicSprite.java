@@ -35,9 +35,49 @@ public class DynamicSprite extends DynamicDisplay {
     private float skewX4;
     private float skewY4;
 
+    public DynamicSprite(TextureRegion region) {
+	float width = 0;
+	float height = 0;
+	if (region != null) {
+	    sprite = new Sprite(region);
+	    width = region.getRegionWidth();
+	    height = region.getRegionHeight();
+	}
+	setRegistration(registration);
+	bounds.set(0 - width / 2, 0 - height / 2, width, height);
+	skewX1 = 0;
+	skewY1 = 0;
+	skewX2 = 0;
+	skewY2 = 0;
+	skewX3 = 0;
+	skewY3 = 0;
+	skewX4 = 0;
+	skewY4 = 0;
+    }
+
     public DynamicSprite(TextureRegion region, float x, float y) {
 	float width = 0;
 	float height = 0;
+	if (region != null) {
+	    sprite = new Sprite(region);
+	    width = region.getRegionWidth();
+	    height = region.getRegionHeight();
+	}
+	position.set(x, y);
+	setRegistration(registration);
+	bounds.set(x - width / 2, y - height / 2, width, height);
+	skewX1 = 0;
+	skewY1 = 0;
+	skewX2 = 0;
+	skewY2 = 0;
+	skewX3 = 0;
+	skewY3 = 0;
+	skewX4 = 0;
+	skewY4 = 0;
+    }
+
+    public DynamicSprite(TextureRegion region, float x, float y, DynamicRegistration registration) {
+	float width = 0, height = 0;
 	if (region != null) {
 	    sprite = new Sprite(region);
 	    width = region.getRegionWidth();
