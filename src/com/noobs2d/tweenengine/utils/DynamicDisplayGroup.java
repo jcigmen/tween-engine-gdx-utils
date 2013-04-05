@@ -152,7 +152,9 @@ public class DynamicDisplayGroup extends DynamicDisplay {
 	for (int i = 0; i < displays.size(); i++) {
 	    displays.get(i).setVisible(true);
 	    displays.get(i).setEnabled(true);
-	    displays.get(i).tweenManager.update(1000);
+	    if (displays.get(i).tween != null)
+		displays.get(i).tween.kill();
+	    displays.get(i).getTweenManager().update(1000); // kill the tween
 	}
     }
 
@@ -171,10 +173,9 @@ public class DynamicDisplayGroup extends DynamicDisplay {
 
     @Override
     public void setRegistration(DynamicRegistration registration) {
-	for (int i = 0; i < displays.size(); i++) {
+	for (int i = 0; i < displays.size(); i++)
 	    this.registration = registration;
-	    displays.get(i).setRegistration(registration);
-	}
+	//	    displays.get(i).setRegistration(registration);
     }
 
     public int size() {
