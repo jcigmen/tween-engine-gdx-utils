@@ -9,15 +9,14 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class DynamicAnimation extends DynamicDisplay {
 
-    public final TextureRegion[] keyFrames;
-
-    public float frameDuration;
-    public int frameIndex;
-    public int frameCount;
-    public boolean isPlaying = true;
-    public boolean isRepeating = true;
-    public float timeElapsed = 0;
-    public float stateTime = 0;
+    protected final TextureRegion[] keyFrames;
+    protected float frameDuration;
+    protected int frameIndex;
+    protected int frameCount;
+    protected boolean isPlaying = true;
+    protected boolean isRepeating = true;
+    protected float timeElapsed = 0;
+    protected float stateTime = 0;
 
     public DynamicAnimation(DynamicAnimation clone) {
 	keyFrames = clone.keyFrames;
@@ -103,6 +102,20 @@ public class DynamicAnimation extends DynamicDisplay {
 	return bounds;
     }
 
+    /**
+     * @return the frameDuration
+     */
+    public float getFrameDuration() {
+	return frameDuration;
+    }
+
+    /**
+     * @return the frameIndex
+     */
+    public int getFrameIndex() {
+	return frameIndex;
+    }
+
     @Override
     public float getHeight() {
 	return getKeyFrame().getRegionWidth();
@@ -112,14 +125,50 @@ public class DynamicAnimation extends DynamicDisplay {
 	return keyFrames[frameIndex];
     }
 
+    /**
+     * @return the keyFrames
+     */
+    public TextureRegion[] getKeyFrames() {
+	return keyFrames;
+    }
+
+    /**
+     * @return the stateTime
+     */
+    public float getStateTime() {
+	return stateTime;
+    }
+
+    /**
+     * @return the timeElapsed
+     */
+    public float getTimeElapsed() {
+	return timeElapsed;
+    }
+
     @Override
     public float getWidth() {
-	return getKeyFrame().getRegionHeight();
+	return getKeyFrame().getRegionWidth();
+    }
+
+    /**
+     * @return the isPlaying
+     */
+    public boolean isPlaying() {
+	return isPlaying;
+    }
+
+    /**
+     * @return the isRepeating
+     */
+    public boolean isRepeating() {
+	return isRepeating;
     }
 
     @Override
     public void render(SpriteBatch spriteBatch) {
 	if (visible) {
+	    //	    LogUtil.print(this.getClass(), "render(SpriteBatch)", "frameIndex: " + frameIndex);
 	    spriteBatch.setColor(color);
 	    float x = position.x, y = position.y;
 	    float width = getKeyFrame().getRegionWidth(), height = getKeyFrame().getRegionHeight();
@@ -166,6 +215,11 @@ public class DynamicAnimation extends DynamicDisplay {
 	    }
 	    spriteBatch.draw(getKeyFrame(), x, y, origin.x, origin.y, width, height, scale.x, scale.y, rotation);
 	}
+    }
+
+    public void reset() {
+	stateTime = 0;
+	frameIndex = 0;
     }
 
     @Override
