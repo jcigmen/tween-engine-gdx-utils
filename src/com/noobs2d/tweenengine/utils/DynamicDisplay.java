@@ -62,15 +62,13 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
     public boolean visible = true;
     public Tween tween;
 
-    public TweenCallback tweenCallback;
+    @SuppressWarnings("unused")
+    private TweenCallback tweenCallback;
+    private long tweenDeltaTime = System.currentTimeMillis();
+    private TweenManager tweenManager = new TweenManager();
+    private float tweenSpeed = 1f;
 
-    public long tweenDeltaTime = System.currentTimeMillis();
-
-    public TweenManager tweenManager = new TweenManager();
-
-    public float tweenSpeed = 1f;
-
-    /** Only invoke once. If not called, tween will not work. */
+    /** Only invoke once. If not called, tween <b>WILL NOT</b> work. */
     public static void register() {
 	Tween.setCombinedAttributesLimit(9);
 	Tween.registerAccessor(DynamicDisplay.class, new DynamicDisplay() {
@@ -103,6 +101,14 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 
     public void dispose() {
 
+    }
+
+    /**
+     * bring the tween to its target value, unlike {@link DynamicDisplay#killTween()} which just
+     * stops the tween to its current value.
+     */
+    public void endTween() {
+	tweenManager.update(1000);
     }
 
     /**
@@ -156,8 +162,16 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 	return scale.y;
     }
 
+    public long getTweenDeltaTime() {
+	return tweenDeltaTime;
+    }
+
     public TweenManager getTweenManager() {
 	return tweenManager;
+    }
+
+    public float getTweenSpeed() {
+	return tweenSpeed;
     }
 
     @Override
@@ -678,7 +692,16 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 	return visible;
     }
 
+    /** stops the tween to its current value. */
+    public void killTween() {
+	tweenManager.killAll();
+    }
+
     public void pause() {
+	tweenManager.pause();
+    }
+
+    public void pauseTween() {
 	tweenManager.pause();
     }
 
@@ -686,6 +709,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
     public abstract void render(SpriteBatch spriteBatch);
 
     public void resume() {
+	tweenManager.resume();
+    }
+
+    public void resumeTween() {
 	tweenManager.resume();
     }
 
@@ -750,6 +777,18 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 
     public void setScaleY(float scaleY) {
 	scale.y = scaleY;
+    }
+
+    public void setTweenCallback(TweenCallback tweenCallback) {
+	this.tweenCallback = tweenCallback;
+    }
+
+    public void setTweenDeltaTime(long tweenDeltaTime) {
+	this.tweenDeltaTime = tweenDeltaTime;
+    }
+
+    public void setTweenSpeed(float tweenSpeed) {
+	this.tweenSpeed = tweenSpeed;
     }
 
     @Override

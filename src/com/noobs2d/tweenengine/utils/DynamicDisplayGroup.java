@@ -72,7 +72,9 @@ public class DynamicDisplayGroup extends DynamicDisplay {
 	for (int i = 0; i < displays.size(); i++)
 	    if (displays.get(i).getName().equals(name))
 		return displays.get(i);
+	System.out.println("[DynamicDisplayGroup#getByName(String)] Child " + name + " not found!");
 	return null;
+
     }
 
     /**
@@ -152,9 +154,7 @@ public class DynamicDisplayGroup extends DynamicDisplay {
 	for (int i = 0; i < displays.size(); i++) {
 	    displays.get(i).setVisible(true);
 	    displays.get(i).setEnabled(true);
-	    if (displays.get(i).tween != null)
-		displays.get(i).tween.kill();
-	    displays.get(i).getTweenManager().update(1000); // kill the tween
+	    displays.get(i).endTween();
 	}
     }
 

@@ -78,6 +78,7 @@ public class DynamicSprite extends DynamicDisplay {
 
     public DynamicSprite(TextureRegion region, float x, float y, DynamicRegistration registration) {
 	float width = 0, height = 0;
+	region = new TextureRegion(region);
 	if (region != null) {
 	    sprite = new Sprite(region);
 	    width = region.getRegionWidth();
@@ -314,97 +315,97 @@ public class DynamicSprite extends DynamicDisplay {
 
     public Tween interpolateSkewX1(float targetSkewX1, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_X1, duration).target(targetSkewX1);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 
     public Tween interpolateSkewX2(float targetSkewX2, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_X2, duration).target(targetSkewX2);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 
     public Tween interpolateSkewX3(float targetSkewX3, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_X3, duration).target(targetSkewX3);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 
     public Tween interpolateSkewX4(float targetSkewX4, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_X4, duration).target(targetSkewX4);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 
     public Tween interpolateSkewXY1(float targetSkewX1, float targetSkewY1, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_XY1, duration).target(targetSkewX1, targetSkewY1);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 
     public Tween interpolateSkewXY2(float targetSkewX2, float targetSkewY2, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_XY2, duration).target(targetSkewX2, targetSkewY2);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 
     public Tween interpolateSkewXY3(float targetSkewX3, float targetSkewY3, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_XY3, duration).target(targetSkewX3, targetSkewY3);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 
     public Tween interpolateSkewXY4(float targetSkewX4, float targetSkewY4, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_XY4, duration).target(targetSkewX4, targetSkewY4);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 
     public Tween interpolateSkewY1(float targetSkewY1, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_Y1, duration).target(targetSkewY1);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 
     public Tween interpolateSkewY2(float targetSkewY2, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_Y2, duration).target(targetSkewY2);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 
     public Tween interpolateSkewY3(float targetSkewY3, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_Y3, duration).target(targetSkewY3);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 
     public Tween interpolateSkewY4(float targetSkewY4, int duration, boolean autoStart) {
 	tween = Tween.to(this, SKEW_Y4, duration).target(targetSkewY4);
-	tweenDeltaTime = System.currentTimeMillis();
+	setTweenDeltaTime(System.currentTimeMillis());
 	if (autoStart)
-	    tween.start(tweenManager);
+	    tween.start(getTweenManager());
 	return tween;
     }
 

@@ -8,12 +8,13 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class DynamicText extends DynamicDisplay {
 
-    public BitmapFont bitmapFont;
+    private BitmapFont bitmapFont;
 
-    public String text;
-    public HAlignment alignment;
+    private String text;
 
-    public float wrapWidth;
+    private HAlignment alignment;
+
+    private float wrapWidth;
 
     public DynamicText(BitmapFont bitmapFont, String text) {
 	this.bitmapFont = new BitmapFont(bitmapFont.getData().getFontFile(), bitmapFont.getRegion(), false);
@@ -34,6 +35,10 @@ public class DynamicText extends DynamicDisplay {
     @Override
     public void dispose() {
 	bitmapFont.dispose();
+    }
+
+    public BitmapFont getBitmapFont() {
+	return bitmapFont;
     }
 
     @Override
@@ -82,6 +87,10 @@ public class DynamicText extends DynamicDisplay {
 	return text;
     }
 
+    public float getWrapWidth() {
+	return wrapWidth;
+    }
+
     @Override
     public void render(SpriteBatch batch) {
 	if (visible) {
@@ -120,6 +129,10 @@ public class DynamicText extends DynamicDisplay {
 	    }
 	    bitmapFont.drawWrapped(batch, text, x, y, width, alignment);
 	}
+    }
+
+    public void setBitmapFont(BitmapFont bitmapFont) {
+	this.bitmapFont = bitmapFont;
     }
 
     @Override
@@ -174,6 +187,10 @@ public class DynamicText extends DynamicDisplay {
 
     public void setText(String text) {
 	this.text = text;
+    }
+
+    public void setWrapWidth(float wrapWidth) {
+	this.wrapWidth = wrapWidth;
     }
 
     @Override
