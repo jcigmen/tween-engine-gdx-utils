@@ -9,17 +9,12 @@ import aurelienribon.tweenengine.equations.Linear;
 
 public class DynamicValue implements TweenAccessor<DynamicValue> {
 
-    public float value = 0f;
+    private Tween tween;
+    private TweenManager tweenManager = new TweenManager();
 
-    public Tween tween;
-
-    public TweenCallback tweenCallback;
-
-    public long tweenDeltaTime = System.currentTimeMillis();
-
-    public TweenManager tweenManager = new TweenManager();
-
-    public float tweenSpeed = 1f;
+    private long tweenDeltaTime = System.currentTimeMillis();
+    private float tweenSpeed = 1f;
+    private float value = 0f;
 
     public static void register() {
 	Tween.registerAccessor(DynamicValue.class, new DynamicValue(0f));
@@ -53,20 +48,16 @@ public class DynamicValue implements TweenAccessor<DynamicValue> {
 	return tween;
     }
 
-    public TweenCallback getTweenCallback() {
-	return tweenCallback;
-    }
-
-    public long getTweenDeltaTime() {
-	return tweenDeltaTime;
-    }
-
     public TweenManager getTweenManager() {
 	return tweenManager;
     }
 
     public float getTweenSpeed() {
 	return tweenSpeed;
+    }
+
+    public float getValue() {
+	return value;
     }
 
     @Override
@@ -85,20 +76,24 @@ public class DynamicValue implements TweenAccessor<DynamicValue> {
 	return tween;
     }
 
+    public void pauseTween() {
+	tweenManager.pause();
+    }
+
+    public void resumeTween() {
+	tweenManager.resume();
+    }
+
     public void setTween(Tween tween) {
 	this.tween = tween;
     }
 
     public void setTweenCallback(TweenCallback tweenCallback) {
-	this.tweenCallback = tweenCallback;
+	tween.setCallback(tweenCallback);
     }
 
-    public void setTweenDeltaTime(long tweenDeltaTime) {
-	this.tweenDeltaTime = tweenDeltaTime;
-    }
-
-    public void setTweenManager(TweenManager tweenManager) {
-	this.tweenManager = tweenManager;
+    public void setTweenCallbackTriggers(int flags) {
+	tween.setCallbackTriggers(flags);
     }
 
     public void setTweenSpeed(float tweenSpeed) {

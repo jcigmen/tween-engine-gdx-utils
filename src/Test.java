@@ -45,8 +45,8 @@ public class Test extends Game {
 
 	sprite.setRegistration(DynamicRegistration.BOTTOM_CENTER);
 	sprite.setColor(1f, 1f, 1f, 0.2f);
-	sprite.interpolateScaleX(1.25f, 2000, false).repeatYoyo(Tween.INFINITY, 0).start(sprite.tweenManager);
-	sprite.interpolateScaleY(1.15f, 1200, false).repeatYoyo(Tween.INFINITY, 0).start(sprite.tweenManager);
+	sprite.interpolateScaleX(1.25f, 2000, false).repeatYoyo(Tween.INFINITY, 0).start(sprite.getTweenManager());
+	sprite.interpolateScaleY(1.15f, 1200, false).repeatYoyo(Tween.INFINITY, 0).start(sprite.getTweenManager());
 
 	BitmapFont font = new BitmapFont(Gdx.files.internal("data/PRESS2P.fnt"), false);
 	//	font.setFixedWidthGlyphs("Test LabelStyle");

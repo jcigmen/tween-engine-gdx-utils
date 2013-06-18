@@ -115,9 +115,9 @@ public class DynamicDisplayGroup extends DynamicDisplay {
     }
 
     @Override
-    public void pause() {
+    public void pauseTween() {
 	for (int i = 0; i < displays.size(); i++)
-	    displays.get(i).pause();
+	    displays.get(i).pauseTween();
     }
 
     public DynamicDisplay remove(int index) {
@@ -159,9 +159,9 @@ public class DynamicDisplayGroup extends DynamicDisplay {
     }
 
     @Override
-    public void resume() {
+    public void resumeTween() {
 	for (int i = 0; i < displays.size(); i++)
-	    displays.get(i).resume();
+	    displays.get(i).resumeTween();
     }
 
     /**

@@ -20,9 +20,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 
     protected static final int POSITION_X = 0x01;
-
     protected static final int POSITION_Y = 0x02;
-
     protected static final int POSITION_XY = 0x03;
     protected static final int SCALE_X = 0x04;
     protected static final int SCALE_Y = 0x05;
@@ -60,13 +58,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
      * Whether this will not be rendered.
      */
     public boolean visible = true;
-    public Tween tween;
-
-    @SuppressWarnings("unused")
-    private TweenCallback tweenCallback;
-    private long tweenDeltaTime = System.currentTimeMillis();
-    private TweenManager tweenManager = new TweenManager();
-    private float tweenSpeed = 1f;
+    protected Tween tween;
+    protected long tweenDeltaTime = System.currentTimeMillis();
+    protected TweenManager tweenManager = new TweenManager();
+    protected float tweenSpeed = 1f;
 
     /** Only invoke once. If not called, tween <b>WILL NOT</b> work. */
     public static void register() {
@@ -160,6 +155,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 
     public float getScaleY() {
 	return scale.y;
+    }
+
+    public Tween getTween() {
+	return tween;
     }
 
     public long getTweenDeltaTime() {
@@ -697,20 +696,12 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 	tweenManager.killAll();
     }
 
-    public void pause() {
-	tweenManager.pause();
-    }
-
     public void pauseTween() {
 	tweenManager.pause();
     }
 
     /** Draw this display. */
     public abstract void render(SpriteBatch spriteBatch);
-
-    public void resume() {
-	tweenManager.resume();
-    }
 
     public void resumeTween() {
 	tweenManager.resume();
@@ -780,7 +771,11 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
     }
 
     public void setTweenCallback(TweenCallback tweenCallback) {
-	this.tweenCallback = tweenCallback;
+	tween.setCallback(tweenCallback);
+    }
+
+    public void setTweenCallbackTriggers(int flags) {
+	tween.setCallbackTriggers(flags);
     }
 
     public void setTweenDeltaTime(long tweenDeltaTime) {
@@ -858,6 +853,10 @@ public abstract class DynamicDisplay implements TweenAccessor<DynamicDisplay> {
 
     public void setY(float y) {
 	position.y = y;
+    }
+
+    public void startTweenWithManager() {
+	tween.start(tweenManager);
     }
 
     /** Basically should call updateBounds() and updateTween() */
